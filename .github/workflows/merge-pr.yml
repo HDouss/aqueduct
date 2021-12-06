@@ -9,16 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Merge master
+    - name: Merge main
       run: |
-        git merge origin/master
+        git merge origin/main
     - name: Run maven
       run: |
         mvn clean install
-    - name: Push to master
+    - name: Push to main
       uses: devmasx/merge-branch@v1.1.0
       with:
         label_name: 'tomerge'
-        target_branch: 'master'
+        target_branch: 'main'
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
