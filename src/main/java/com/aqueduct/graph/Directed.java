@@ -46,9 +46,9 @@ public final class Directed implements Graph {
     private final Set<Edge> edge;
 
     /**
-     * A Map holding association between a vertex and its direct neighbours.
+     * A Map holding association between a vertex and its direct neighbors.
      */
-    private final Map<Vertex, Set<Vertex>> neighbours;
+    private final Map<Vertex, Set<Vertex>> neighbors;
 
     /**
      * A Map holding association between a vertex and its outgoing edges.
@@ -61,7 +61,7 @@ public final class Directed implements Graph {
     public Directed() {
         this.vertex = new HashSet<Vertex>();
         this.edge = new HashSet<Edge>();
-        this.neighbours = new HashMap<Vertex, Set<Vertex>>();
+        this.neighbors = new HashMap<Vertex, Set<Vertex>>();
         this.outgoing = new HashMap<Vertex, Set<Edge>>();
     }
 
@@ -97,7 +97,7 @@ public final class Directed implements Graph {
 
     @Override
     public Set<Vertex> connected(final Vertex vtx) {
-        return this.neighbours.get(vtx);
+        return this.neighbors.get(vtx);
     }
 
     @Override
@@ -120,15 +120,15 @@ public final class Directed implements Graph {
     }
 
     /**
-     * Connects a vertex as a neighbour for another vertex.
+     * Connects a vertex as a neighbor for another vertex.
      * @param start Vertex to connect to
      * @param end Vertex to connect
      */
     private void connect(final Vertex start, final Vertex end) {
-        Set<Vertex> connected = this.neighbours.get(start);
+        Set<Vertex> connected = this.neighbors.get(start);
         if (connected == null) {
             connected = new HashSet<Vertex>();
-            this.neighbours.put(start, connected);
+            this.neighbors.put(start, connected);
         }
         connected.add(end);
     }

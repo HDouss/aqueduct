@@ -65,8 +65,8 @@ public interface Graph {
 
     /**
      * Gets the connected vertices of a given vertex.
-     * @param vtx Vertex to get neighbours for
-     * @return The set of neighbouring vertices
+     * @param vtx Vertex to get neighbors for
+     * @return The set of neighboring vertices
      */
     Set<Vertex> connected(Vertex vtx);
 
