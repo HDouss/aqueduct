@@ -60,7 +60,7 @@ public final class VertexTest {
         final Vertex empty = new Vertex(null);
         MatcherAssert.assertThat(VertexTest.start(), Matchers.equalTo(VertexTest.start()));
         MatcherAssert.assertThat(VertexTest.start(), Matchers.not(VertexTest.end()));
-        MatcherAssert.assertThat(VertexTest.start(), Matchers.not(empty));
+        MatcherAssert.assertThat(empty, Matchers.not(VertexTest.start()));
         MatcherAssert.assertThat(
             VertexTest.start().hashCode(), Matchers.equalTo(VertexTest.start().hashCode())
         );
