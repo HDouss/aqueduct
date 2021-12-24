@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 /**
@@ -71,6 +72,19 @@ public class MinHeapTest {
         MatcherAssert.assertThat(heap.pop().element(), Matchers.is('d'));
         MatcherAssert.assertThat(heap.pop().element(), Matchers.is('e'));
         MatcherAssert.assertThat(heap.pop().element(), Matchers.is(chr));
+    }
+
+    /**
+     * Does not insert more than max size.
+     */
+    @Test
+    public void respectsMaxSize() {
+        final List<Node<Character>> elts = MinHeapTest.elements();
+        final MinHeap<Character> heap = new MinHeap<>(0);
+        for (final Node<Character> elt : elts) {
+            heap.insert(elt);
+        }
+        MatcherAssert.assertThat(heap.pop(), Matchers.is(IsNull.nullValue()));
     }
 
     /**

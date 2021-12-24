@@ -73,7 +73,7 @@ public class NodeTest {
         final Node<String> empty = new Node<>(null, value);
         MatcherAssert.assertThat(node, Matchers.equalTo(same));
         MatcherAssert.assertThat(node, Matchers.not(other));
-        MatcherAssert.assertThat(node, Matchers.not(empty));
+        MatcherAssert.assertThat(empty, Matchers.not(node));
         MatcherAssert.assertThat(
             node.hashCode(), Matchers.equalTo(same.hashCode())
         );
