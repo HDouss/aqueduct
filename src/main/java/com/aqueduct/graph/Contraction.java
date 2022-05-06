@@ -23,7 +23,6 @@
  */
 package com.aqueduct.graph;
 
-import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -101,7 +100,7 @@ public final class Contraction implements Graph {
     private static Directed contract(final Graph origin, final Vertex first, final Vertex second) {
         final Set<Vertex> vtxs = new HashSet<>(origin.vertices());
         if (!vtxs.remove(first) || !vtxs.remove(second)) {
-            throw new InvalidParameterException(
+            throw new IllegalArgumentException(
                 String.format(
                     "Contracted vertices %s and %s must be part of the graph %s",
                     first, second, origin

@@ -25,7 +25,9 @@ package com.aqueduct.graph;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Test for {@link Contraction}.
@@ -34,12 +36,19 @@ import org.junit.Test;
 public final class ContractionTest {
 
     /**
+     * Junit rule for expected exceptions.
+     */
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    /**
      * Gives access to vertices and edges.
      */
     @Test
     public void buildsDirectedGraph() {
         final Graph graph = ContractionTest.graph();
-        final int vertices = 4;
+        graph.addVertices(new Vertex(""));
+        final int vertices = 5;
         final int edges = 8;
         MatcherAssert.assertThat(graph.edges().size(), Matchers.equalTo(edges));
         MatcherAssert.assertThat(graph.vertices().size(), Matchers.equalTo(vertices));
@@ -52,8 +61,9 @@ public final class ContractionTest {
     @Test
     public void ensuresEdgesAreDirected() {
         final Graph graph = ContractionTest.graph();
-        final int edges = 3;
+        final int edges = 4;
         graph.addEdge(ContractionTest.start(), ContractionTest.end(), 1.);
+        graph.addEdge(new Edge(ContractionTest.start(), ContractionTest.end(), 1.));
         MatcherAssert.assertThat(
             graph.connected(ContractionTest.start()).size(), Matchers.equalTo(1)
         );
@@ -69,9 +79,21 @@ public final class ContractionTest {
     }
 
     /**
-     * Builds a directed graph with 2 vertices. The graph has 2 edges that both start from the
-     * "start" vertex and end in the "end" vertex.
-     * @return A graph containing 2 vertices and 2 edges.
+     * Throws an exception if contracted vertex does not belong to the graph.
+     */
+    @Test
+    public void errorsIfVertexNotInGraph() {
+        final Undirected result = new Undirected();
+        result.addVertices(ContractionTest.start());
+        this.thrown.expect(IllegalArgumentException.class);
+        new Contraction(result, ContractionTest.start(), ContractionTest.end());
+    }
+
+    /**
+     * Builds a graph after contracting 2 vertices from an undirected graph having 5 vertices
+     * and 5 (undirected) edges.
+     * The resulting graph after contraction has 4 vertices and 8 (directed) edges.
+     * @return A graph containing 4 vertices and 8 edges.
      */
     private static Graph graph() {
         final Undirected result = new Undirected();
