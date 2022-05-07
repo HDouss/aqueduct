@@ -48,7 +48,7 @@ public final class ContractionTest {
     public void buildsDirectedGraph() {
         final Graph graph = ContractionTest.graph();
         graph.addVertices(new Vertex(""));
-        final int vertices = 5;
+        final int vertices = 6;
         final int edges = 8;
         MatcherAssert.assertThat(graph.edges().size(), Matchers.equalTo(edges));
         MatcherAssert.assertThat(graph.vertices().size(), Matchers.equalTo(vertices));
@@ -90,10 +90,10 @@ public final class ContractionTest {
     }
 
     /**
-     * Builds a graph after contracting 2 vertices from an undirected graph having 5 vertices
+     * Builds a graph after contracting 2 vertices from an undirected graph having 6 vertices
      * and 5 (undirected) edges.
-     * The resulting graph after contraction has 4 vertices and 8 (directed) edges.
-     * @return A graph containing 4 vertices and 8 edges.
+     * The resulting graph after contraction has 5 vertices and 8 (directed) edges.
+     * @return A graph containing 5 vertices and 8 edges.
      */
     private static Graph graph() {
         final Undirected result = new Undirected();
@@ -102,7 +102,8 @@ public final class ContractionTest {
         final Vertex first = new Vertex("first");
         final Vertex second = new Vertex("second");
         final Vertex third = new Vertex("third");
-        result.addVertices(start, end, first, second, third);
+        final Vertex fourth = new Vertex("fourth");
+        result.addVertices(start, end, first, second, third, fourth);
         result.addEdge(new Edge(start, end, 1.));
         result.addEdge(start, end, 1.);
         result.addEdge(first, second, 1.);
