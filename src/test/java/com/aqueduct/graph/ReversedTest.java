@@ -135,4 +135,29 @@ public final class ReversedTest {
             graph.connectedEdges(eight).size(), Matchers.equalTo(connected)
         );
     }
+
+    /**
+     * Reversing a directed graph twice gives back the original graph.
+     * @throws URISyntaxException If error
+     * @throws IOException If error
+     */
+    @Test
+    public void twiceIsIdentity() throws IOException, URISyntaxException {
+        final DirectedText origin = new DirectedText(
+            Paths.get(ClassLoader.getSystemResource(ReversedTest.ELEVEN_EDGE_FILE).toURI())
+        );
+        final Graph graph = new Reversed(new Reversed(origin));
+        final Vertex one = new Vertex("1");
+        final Vertex eight = new Vertex("8");
+        final Vertex four = new Vertex("4");
+        MatcherAssert.assertThat(
+            graph.connected(one).size(), Matchers.equalTo(origin.connected(one).size())
+        );
+        MatcherAssert.assertThat(
+            graph.connected(four).size(), Matchers.equalTo(origin.connected(four).size())
+        );
+        MatcherAssert.assertThat(
+            graph.connected(eight).size(), Matchers.equalTo(origin.connected(eight).size())
+        );
+    }
 }
