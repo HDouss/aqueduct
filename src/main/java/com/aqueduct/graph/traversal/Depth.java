@@ -53,7 +53,7 @@ public final class Depth implements Iterator<Vertex> {
     private final Set<Vertex> visited;
 
     /**
-     * Constructor. Builds a BFS iterator.
+     * Constructor. Builds a DFS iterator.
      * @param graph Graph to traverse
      * @param start Starting vertex
      */
