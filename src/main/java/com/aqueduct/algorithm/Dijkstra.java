@@ -100,6 +100,12 @@ public final class Dijkstra {
                 current = edge.start();
                 result += edge.cost();
             }
+        } else {
+            if (this.begin.equals(vtx)) {
+                result = 0;
+            } else {
+                result = -1;
+            }
         }
         return result;
     }

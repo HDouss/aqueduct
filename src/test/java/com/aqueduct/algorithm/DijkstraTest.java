@@ -117,4 +117,19 @@ public final class DijkstraTest {
         final Dijkstra djk = new Dijkstra(graph, new Vertex("1"));
         MatcherAssert.assertThat(djk.cost(new Vertex(dest)), Matchers.is(cost));
     }
+
+    /**
+     * Dijkstra implementation can stop at a given vertex.
+     * @throws URISyntaxException If error
+     * @throws IOException If error
+     */
+    @Test
+    public void stopsAtDestination() throws IOException, URISyntaxException {
+        final Graph graph = new DirectedText(
+            Paths.get(ClassLoader.getSystemResource(DijkstraTest.COMPLEX).toURI())
+        );
+        final Vertex destination = new Vertex("114");
+        final Dijkstra djk = new Dijkstra(graph, new Vertex("1"), destination);
+        MatcherAssert.assertThat(djk.cost(new Vertex("7")), Matchers.is(-1d));
+    }
 }
